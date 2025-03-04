@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: mysql-database
+  labels:
+    app: database
+spec:
+  # modify replicas according to your case
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+      - name: mysql-database
+        image: mysql
+        env:
+          - name: MYSQL_ALLOW_EMPTY_PASSWORD
+            value: "empty"
+          - name: MYSQL_DATABASE
+            value: "wpdb"
+          - name: MYSQL_USER
+            value: "wpuser"
+          - name: MYSQL_PASSWORD
+            value: "wpuser1234"
